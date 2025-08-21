@@ -4,7 +4,8 @@ import kh.virakchantrak.library.exception.core.SystemCoreAware;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorCode implements SystemCoreAware {
-    NAME_ALREADY_EXIST("Name already exist", HttpStatus.CONFLICT);
+    NAME_ALREADY_EXIST("Name already exist", HttpStatus.CONFLICT),
+    DEPARTMENT_NOT_FOUND("Department not found", HttpStatus.NOT_FOUND);
 
     private final String message;
     private final HttpStatus status;
