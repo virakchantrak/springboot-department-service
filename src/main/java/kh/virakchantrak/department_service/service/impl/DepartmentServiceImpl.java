@@ -10,7 +10,11 @@ import kh.virakchantrak.department_service.service.DepartmentService;
 
 import kh.virakchantrak.library.exception.core.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +31,17 @@ public class DepartmentServiceImpl implements DepartmentService {
         DepartmentEntity departmentEntity = mapper.toEntity(requestDTO);
         DepartmentEntity savedEntity = departmentRepo.save(departmentEntity);
         return mapper.toResponseDTO(savedEntity);
+    }
+
+    @Override
+    public DepartmentResponseDTO getById(Long id) {
+        DepartmentEntity departmentEntity = departmentRepo.findById(id)
+                .orElseThrow(() -> new ApiException(ErrorCode.DEPARTMENT_NOT_FOUND));
+        return mapper.toResponseDTO(departmentEntity);
+    }
+
+    @Override
+    public Page<DepartmentResponseDTO> getAllDepartments(Pageable pageable) {
+        return departmentRepo.findAll(pageable).map(mapper::toResponseDTO);
     }
 }
