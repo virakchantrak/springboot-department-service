@@ -23,4 +23,7 @@ public class DepartmentEntity extends BaseEntity {
 
     @Column(length = 255)
     private String description;
+
+    @Column(nullable = false, unique = true, length = 10)
+    private String departmentCode;
 }

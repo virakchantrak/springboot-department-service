@@ -7,14 +7,11 @@ import kh.virakchantrak.department_service.entity.DepartmentEntity;
 import kh.virakchantrak.department_service.mapper.DepartmentMapper;
 import kh.virakchantrak.department_service.repository.DepartmentRepo;
 import kh.virakchantrak.department_service.service.DepartmentService;
-
 import kh.virakchantrak.library.exception.core.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +23,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentResponseDTO create(DepartmentRequestDTO requestDTO) {
         if (departmentRepo.existsByName(requestDTO.getName())) {
             throw new ApiException(ErrorCode.NAME_ALREADY_EXIST);
+        }
+        if (departmentRepo.existsByDepartmentCode(requestDTO.getDepartmentCode())) {
+            throw new ApiException(ErrorCode.DEPARTMENT_CODE_ALREADY_EXIST);
         }
 
         DepartmentEntity departmentEntity = mapper.toEntity(requestDTO);
@@ -39,6 +39,14 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .orElseThrow(() -> new ApiException(ErrorCode.DEPARTMENT_NOT_FOUND));
         return mapper.toResponseDTO(departmentEntity);
     }
+
+    @Override
+    public DepartmentResponseDTO getByDepartmentCode(String departmentCode) {
+        DepartmentEntity departmentEntity = departmentRepo.findByDepartmentCode(departmentCode)
+                .orElseThrow(() -> new ApiException(ErrorCode.DEPARTMENT_NOT_FOUND));
+        return mapper.toResponseDTO(departmentEntity);
+    }
+
 
     @Override
     public Page<DepartmentResponseDTO> getAllDepartments(Pageable pageable) {

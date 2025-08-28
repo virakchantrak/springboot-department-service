@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 
@@ -26,6 +24,11 @@ public class DepartmentController {
     @GetMapping("/{id}")
     public DepartmentResponseDTO getById(@PathVariable Long id) {
         return departmentService.getById(id);
+    }
+
+    @GetMapping("/code/{departmentCode}")
+    public DepartmentResponseDTO getDepartmentByCode(@PathVariable String departmentCode) {
+        return departmentService.getByDepartmentCode(departmentCode);
     }
 
     @GetMapping

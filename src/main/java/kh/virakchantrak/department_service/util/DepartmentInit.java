@@ -20,16 +20,19 @@ public class DepartmentInit {
         DepartmentEntity department = new DepartmentEntity();
         department.setName("IT");
         department.setDescription("Information Technology Department");
+        department.setDepartmentCode("IT001");
         departmentRepo.save(department);
 
         department = new DepartmentEntity();
         department.setName("HR");
         department.setDescription("Human Resources Department");
+        department.setDepartmentCode("HR001");
         departmentRepo.save(department);
 
         department = new DepartmentEntity();
         department.setName("Finance");
         department.setDescription("Finance Department");
+        department.setDepartmentCode("FIN001");
         departmentRepo.save(department);
     }
 }

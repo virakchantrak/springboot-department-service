@@ -9,4 +9,6 @@ public class DepartmentRequestDTO {
     @NotNull
     private String name;
     private String description;
+    @NotNull
+    private String departmentCode;
 }

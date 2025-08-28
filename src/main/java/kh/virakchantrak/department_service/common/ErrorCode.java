@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 
 public enum ErrorCode implements SystemCoreAware {
     NAME_ALREADY_EXIST("Name already exist", HttpStatus.CONFLICT),
-    DEPARTMENT_NOT_FOUND("Department not found", HttpStatus.NOT_FOUND);
+    DEPARTMENT_NOT_FOUND("Department not found", HttpStatus.NOT_FOUND),
+    DEPARTMENT_CODE_ALREADY_EXIST("Department code already exist", HttpStatus.CONFLICT);
 
     private final String message;
     private final HttpStatus status;
